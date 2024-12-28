@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Score Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            
+        }
+        .results {
+            margin-top: 20px;
+        }
+        body{
+            background-color: rgb(173, 83, 9);
+        }
+    </style
+</head>
+<body>
+    <h2>made by sudair khan</h2>
+    <h1>Student Score Tracker</h1>
+    <p>Enter the student scores below. Type "stop" to quit or "-1" to finish.</p>
+
+    <div id="scores-container">
+        <!-- Scores will be displayed here -->
+    </div>
+
+    <div class="results">
+        <p id="total-count"></p>
+        <p id="total-sum"></p>
+        <p id="average-score"></p>
+        <p id="highest-score"></p>
+        <p id="lowest-score"></p>
+    </div>
+
+    <script>
+        let highest = 0;
+        let lowest = 0;
+        let total = 0;
+        let count = 0;
+        let num = [];
+        const size = 100;
+
+        // Prompt for user input
+        let mum;
+        while (true) {
+            mum = prompt("Enter the student score or type 'stop' to quit");
+
+            if (mum === 'stop' || mum === null) {
+                break;
+            }
+
+            mum = parseInt(mum);
+
+            if (mum === -1 || mum >= size) {
+                break;
+            }
+
+            num[count] = mum;
+            count++;
+        }
+
+        // Displaying scores and calculating total, highest, lowest
+        let scoresContainer = document.getElementById("scores-container");
+        for (let i = 0; i < count; i++) {
+            if (i === 0) {
+                highest = num[i];
+                lowest = num[i];
+            }
+
+            if (highest < num[i]) {
+                highest = num[i];
+            }
+
+            if (lowest > num[i]) {
+                lowest = num[i];
+            }
+
+            // Display each score in the HTML
+            let scoreItem = document.createElement("p");
+            scoreItem.textContent = `Score: ${num[i]}`;
+            scoresContainer.appendChild(scoreItem);
+
+            total += num[i];
+        }
+
+        // Display the results
+        document.getElementById("total-count").textContent = `The total number of scores entered: ${count}`;
+        document.getElementById("total-sum").textContent = `The total sum of scores is: ${total}`;
+        let ave = total / count;
+        document.getElementById("average-score").textContent = `The average score in the class is: ${ave}`;
+        document.getElementById("highest-score").textContent = `The highest score you entered is: ${highest}`;
+        document.getElementById("lowest-score").textContent = `The lowest score you entered is: ${lowest}`;
+    </script>
+</body>
+</html>
